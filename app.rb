@@ -15,6 +15,7 @@ get('/') do
 end
 
 get('/albums') do
+  # binding.pry
   @albums = Album.all
   erb(:albums)
 end
@@ -53,6 +54,17 @@ delete('/albums/:id') do
   @album.delete()
   @albums = Album.all
   erb(:albums)
+end
+
+get('/albums/:search') do
+  @album = Album.search(params[:search])
+  erb(:search)
+end
+
+get('/albums/:name') do
+  @album = Album.sort(params[:name])
+  @album = Album.all
+  erb(:album)
 end
 
 # get('/albums/:id') do

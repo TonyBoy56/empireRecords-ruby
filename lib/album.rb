@@ -24,6 +24,11 @@ class Album
     @@albums[id]
   end
 
+  def self.search(name)
+    album = @@albums.values.select { |album| album.name == name }
+    album.sort_by { |x| x.name }
+  end
+
   def save
     @@albums[self.id] = Album.new(self.name, self.id)
   end
@@ -39,4 +44,5 @@ class Album
   def delete
     @@albums.delete(self.id)
   end
+
 end

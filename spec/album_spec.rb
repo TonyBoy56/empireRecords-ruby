@@ -1,6 +1,7 @@
 # unit tests
 require 'rspec'
 require 'album'
+require 'pry'
 
 describe '#Album' do
 
@@ -68,6 +69,25 @@ describe '#Album' do
       album2.save()
       album.delete()
       expect(Album.all).to(eq([album2]))
+    end
+  end
+
+  describe('.search') do
+    it("searches for an album by name") do
+      album = Album.new("Giant Steps", nil)
+      album.save()
+      expect(Album.search(album.name)).to(eq([album]))
+    end
+  end
+
+  describe('.sort') do
+    it("sorts the albums by name") do
+      album = Album.new("Giant Step", nil)
+      album.save()
+      album2 = Album.new("Blue", nil)
+      album2.save()
+      album.sort()
+      expect(Album.sort(album.name)).to(eq([]))
     end
   end
 end
